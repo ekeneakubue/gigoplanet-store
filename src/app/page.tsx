@@ -8,17 +8,26 @@ import { ShoppingBag, Star, Truck, Shield, Clock, Check } from "lucide-react"
 import { useCart } from "@/contexts/cart-context"
 import { toast } from "sonner"
 
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  rating: number;
+  reviews: number;
+  image?: string; 
+}
+
 export default function HomePage() {
   const { addItem, isInCart, getItemQuantity } = useCart()
 
-  const featuredProducts = [
+  const featuredProducts: Product[] = [
     { id: 1, name: "Wireless Headphones", price: 99.99, rating: 4.5, reviews: 128 },
     { id: 2, name: "Smart Watch", price: 199.99, rating: 4.3, reviews: 89 },
     { id: 3, name: "Laptop Stand", price: 49.99, rating: 4.7, reviews: 256 },
     { id: 4, name: "Phone Case", price: 24.99, rating: 4.2, reviews: 67 },
   ]
 
-  const handleAddToCart = (product: any) => {
+  const handleAddToCart = (product: Product) => {
     addItem({
       id: product.id,
       name: product.name,
