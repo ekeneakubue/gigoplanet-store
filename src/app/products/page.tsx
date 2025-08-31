@@ -3,12 +3,25 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ShoppingCart, Heart, Star, Filter, Search, Check } from "lucide-react"
+import { ShoppingCart, Heart, Star, Search, Check } from "lucide-react"
 import { useCart } from "@/contexts/cart-context"
 import { toast } from "sonner"
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  comparePrice: number | null;
+  rating: number;
+  reviews: number;
+  image: string;
+  category: string;
+  isOnSale: boolean;
+  isNew: boolean;
+}
 
 export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -17,7 +30,7 @@ export default function ProductsPage() {
   const { addItem, isInCart, getItemQuantity } = useCart()
 
   // Mock products data
-  const products = [
+  const products: Product[] = [
     {
       id: 1,
       name: "Wireless Bluetooth Headphones",
@@ -130,7 +143,7 @@ export default function ProductsPage() {
     }
   })
 
-  const handleAddToCart = (product: any) => {
+  const handleAddToCart = (product: Product) => {
     addItem({
       id: product.id,
       name: product.name,
