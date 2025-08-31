@@ -113,6 +113,9 @@ model ProductVariant {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // Relations
+  orderItems OrderItem[]
+
   @@map("product_variants")
 }
 
